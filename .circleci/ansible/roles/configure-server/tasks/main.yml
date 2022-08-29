@@ -2,9 +2,9 @@
 - name: "Add Node.js from Nodesource"
   become: true
   shell: |
-    curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 
-- name: "Install Node.js 13"
+- name: "Install Node.js 16"
   become: true
   apt:
     name: ["nodejs"]
