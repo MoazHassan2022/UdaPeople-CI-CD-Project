@@ -191,6 +191,11 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt update
+            sudo apt install python3-pip
       - install_awscli
       - install_ansible
       - add_ssh_keys:
