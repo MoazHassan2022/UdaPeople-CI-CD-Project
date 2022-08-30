@@ -291,6 +291,11 @@ jobs:
     steps:
       - checkout
       - install_awscli
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt update
+            sudo apt install python3-pip
       - install_ansible
       - install_nodejs
       - add_ssh_keys:
