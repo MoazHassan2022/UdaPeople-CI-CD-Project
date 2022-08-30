@@ -43,7 +43,7 @@ commands:
           when: on_fail
           command: |
             SUCCESS = $(curl --insecure  https://kvdb.io/${KVDB_BUCKET_ID}/migration_<< parameters.WorkflowID >>)
-            echo SUCCESS
+            echo $SUCCESS
             if(( $SUCCESS=='done' ));
             then
               cd ~/project/backend
@@ -230,7 +230,7 @@ jobs:
             then
               curl https://kvdb.io/${KVDB_BUCKET_ID}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d 'done'
             fi
-      - destroy-environment
+      #- destroy-environment
       - revert-migrations
 
 #  deploy-frontend:
@@ -341,15 +341,15 @@ workflows:
       #    requires: [build-backend]
       #- scan-frontend:
       #    requires: [build-frontend]
-      - deploy-infrastructure:
-          #requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [master]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
+      #- deploy-infrastructure:
+      #requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #    filters:
+      #      branches:
+      #        only: [master]
+      #- configure-infrastructure:
+      #    requires: [deploy-infrastructure]
+      - run-migrations
+      #    requires: [configure-infrastructure]
       #- deploy-frontend:
       #    requires: [run-migrations]
       #- deploy-backend:
