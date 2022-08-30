@@ -250,7 +250,7 @@ jobs:
             else
               echo "No migrations are pending"
             fi
-      - destroy-environment
+      #- destroy-environment
       - revert-migrations
 
   deploy-frontend:
@@ -393,20 +393,20 @@ workflows:
       #    requires: [build-backend]
       #- scan-frontend:
       #    requires: [build-frontend]
-      - deploy-infrastructure:
-          #requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [master]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
-      #- run-migrations:
+      #- deploy-infrastructure:
+      #requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #    filters:
+      #      branches:
+      #        only: [master]
+      #- configure-infrastructure:
+      #    requires: [deploy-infrastructure]
+      - run-migrations
       #    requires: [configure-infrastructure]
       #- deploy-frontend:
       #    requires: [run-migrations]
-      - deploy-backend:
-          requires: [configure-infrastructure]
-        #requires: [run-migrations]
+      #- deploy-backend:
+      #    requires: [configure-infrastructure]
+      #requires: [run-migrations]
       #- smoke-test:
       #    requires: [deploy-backend, deploy-frontend]
       #- cloudfront-update:
