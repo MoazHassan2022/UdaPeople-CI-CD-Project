@@ -43,7 +43,7 @@ commands:
           when: on_fail
           command: |
             SUCCESS = $(curl --insecure  https://kvdb.io/${KVDB_BUCKET_ID}/migration_<< parameters.WorkflowID >>)
-            if(( $SUCCESS=='done' ));
+            if(( $SUCCESS==1 ));
             then
               cd ~/project/backend
               npm Install
@@ -228,7 +228,7 @@ jobs:
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-              curl https://kvdb.io/${KVDB_BUCKET_ID}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d 'done'
+              curl https://kvdb.io/${KVDB_BUCKET_ID}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
       - destroy-environment
       - revert-migrations
@@ -331,25 +331,25 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [master]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
+      #- build-frontend
+      #- build-backend
+      #- test-frontend:
+      #    requires: [build-frontend]
+      #- test-backend:
+      #    requires: [build-backend]
+      #- scan-backend:
+      #    requires: [build-backend]
+      #- scan-frontend:
+      #    requires: [build-frontend]
+      #- deploy-infrastructure:
+      #    requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      #    filters:
+      #      branches:
+      #        only: [master]
+      #- configure-infrastructure:
+      #    requires: [deploy-infrastructure]
+      - run-migrations
+      #    requires: [configure-infrastructure]
       #- deploy-frontend:
       #    requires: [run-migrations]
       #- deploy-backend:
