@@ -9,7 +9,7 @@
     src: artifact.tar.gz
     dest: /home/ubuntu/backend
 
-- name: "Installing Node Dependencies"
+- name: "Installing NodeDependencies"
   shell: |
     cd /home/ubuntu/backend
     npm i
