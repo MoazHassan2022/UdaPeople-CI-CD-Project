@@ -288,6 +288,17 @@ jobs:
   deploy-backend:
     docker:
       - image: cimg/base:stable
+        environment:
+          NODE_ENV: "production"
+          VERSION: "1"
+          ENVIRONMENT: "production"
+          TYPEORM_CONNECTION: $TYPEORM_CONNECTION
+          TYPEORM_HOST: $TYPEORM_HOST
+          TYPEORM_USERNAME: $TYPEORM_USERNAME
+          TYPEORM_PASSWORD: $TYPEORM_PASSWORD
+          TYPEORM_DATABASE: $TYPEORM_DATABASE
+          TYPEORM_PORT: $TYPEORM_PORT
+          TYPEORM_ENTITIES: $TYPEORM_ENTITIES
     steps:
       - checkout
       - install_awscli
@@ -315,7 +326,7 @@ jobs:
             cd backend
             npm run build
             cd ..
-            tar -C backend -czvf artifact.tar.gz
+            tar -C backend -czvf artifact.tar.gz .
             #cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
             #cd .circleci/ansible
             cat ~/project/.circleci/ansible/inventory.txt
@@ -400,12 +411,12 @@ workflows:
               only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
+      #- run-migrations:
+      #    requires: [configure-infrastructure]
       #- deploy-frontend:
       #    requires: [run-migrations]
-      - deploy-backend:
-          requires: [run-migrations]
+      - deploy-backend
+      #    requires: [run-migrations]
       #requires: [run-migrations]
       #- smoke-test:
       #    requires: [deploy-backend, deploy-frontend]
