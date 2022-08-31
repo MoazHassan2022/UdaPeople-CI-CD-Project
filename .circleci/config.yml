@@ -393,26 +393,26 @@ jobs:
       - destroy-environment
       - revert-migrations
 
-cleanup:
-  docker:
-    - image: cimg/base:stable
-  steps:
-    - checkout
-    - install_awscli
-    - install_nodejs
-    - run:
-        name: Remove old stacks and files
-        command: |
-          export STACKS=($(aws cloudformation list-stacks \
-              --query "StackSummaries[*].StackName" \
-              --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
-          echo Stack names: "${STACKS[@]}"
-          export OldWorkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET_ID}/old-workflow-id)
-          echo $OldWorkflowID 
-          if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
-          then
-            aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
-          fi
+  cleanup:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - install_awscli
+      - install_nodejs
+      - run:
+          name: Remove old stacks and files
+          command: |
+            export STACKS=($(aws cloudformation list-stacks \
+                --query "StackSummaries[*].StackName" \
+                --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
+            echo Stack names: "${STACKS[@]}"
+            export OldWorkflowID=$(curl --insecure https://kvdb.io/${KVDB_BUCKET_ID}/old-workflow-id)
+            echo $OldWorkflowID 
+            if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
+            then
+              aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
+            fi
 
 workflows:
   default:
