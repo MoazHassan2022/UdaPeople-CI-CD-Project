@@ -252,6 +252,7 @@ jobs:
             fi
       - destroy-environment
       - revert-migrations
+      #CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
   deploy-frontend:
     docker:
@@ -310,14 +311,19 @@ jobs:
             cd backend
             npm install
       - run:
-          name: Deploy backend
+          name: Package Backend
           command: |
             cd backend
             npm run build
-            touch artifact.tar.gz
-            tar -czf artifact.tar.gz --exclude=artifact.tar.gz .
+            tar -czf artifact.tar.gz dist/* package*
             cd ..
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+      - run:
+          name: Deploy backend
+          command: |
+            export TYPEORM_MIGRATIONS_DIR=./migrations
+            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
+            export TYPEORM_MIGRATIONS=./migrations/*.ts
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
@@ -401,12 +407,12 @@ workflows:
               only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
-      #- run-migrations
-      #    requires: [configure-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
       #- deploy-frontend:
       #    requires: [run-migrations]
       - deploy-backend:
-          requires: [configure-infrastructure]
+          requires: [run-migrations]
       #requires: [run-migrations]
       #- smoke-test:
       #    requires: [deploy-backend, deploy-frontend]

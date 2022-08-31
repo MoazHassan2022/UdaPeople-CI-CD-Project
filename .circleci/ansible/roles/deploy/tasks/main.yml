@@ -1,32 +1,30 @@
 ---
-- name: "Create backend dir"
+- name: "Creates backend app directory"
   file:
-    path: /home/ubuntu/backend
+    path: ~/backend-app
     state: directory
 
 - name: "Unarchive backend files"
   unarchive:
     src: artifact.tar.gz
-    dest: /home/ubuntu/backend
+    dest: ~/backend-app
 
-- name: "Installing NodeDependencies"
+- name: "Installing Node Dependencies"
   shell: |
-    cd /home/ubuntu/backend
+    cd ~/backend-app
     npm i
-
-- name: "Starting Node app with PM2"
+- name: "Executing Node app with PM2"
   shell: |
-    cd /home/ubuntu/backend
+    cd ~/backend-app/dist
     pm2 stop default
-    pm2 start npm -- start
-  environment:
-    ENVIRONMENT: production
-    TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
-    TYPEORM_MIGRATIONS_DIR: "./migrations"
-    TYPEORM_MIGRATIONS: "./migrations/*.js"
-    TYPEORM_ENTITIES: "./modules/domain/**/*.entity.js"
-    TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
-    TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
-    TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
-    TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
-    TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
+    pm2 start main.js
+  register: execute_node
+
+- name: print message
+  debug:
+    msg: "{{ execute_node.stdout_lines }}"
+
+- name: "Configure pm2 to start as service"
+  become: true
+  shell: |
+    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
