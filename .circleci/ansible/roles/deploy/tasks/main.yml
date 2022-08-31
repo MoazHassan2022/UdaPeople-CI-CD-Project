@@ -1,32 +1,24 @@
 ---
-- name: install rsync on the ansible controller
-  become: true
-  connection: local
-  package:
-    name:
-      - openssh
-      - rsync
-    state: present
+- name: "Create backend dir"
+  file:
+    path: /home/ubuntu/backend
+    state: directory
 
-- name: "move files to server"
-  become: true
-  synchronize:
-    src: /root/project/backend/dist
-    dest: ./udapeople
-    recursive: true
+- name: "Unarchive backend files"
+  unarchive:
+    src: artifact.tar.gz
+    dest: /home/ubuntu/backend
 
-- name: "move node modules"
-  become: true
-  synchronize:
-    src: /root/project/backend/node_modules
-    dest: ./udapeople
-    recursive: true
+- name: "Installing NodeDependencies"
+  shell: |
+    cd /home/ubuntu/backend
+    npm i
 
-- name: "run server"
-  become: true
-  command: pm2 start -f ./main.js
-  args:
-    chdir: ./udapeople/dist
+- name: "Starting Node app with PM2"
+  shell: |
+    cd /home/ubuntu/backend
+    pm2 stop default
+    pm2 start npm -- start
   environment:
     ENVIRONMENT: production
     TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
