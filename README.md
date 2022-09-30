@@ -10,12 +10,14 @@
 </ul>
 
 <h2 href="#BuiltWith">Built With : </h2>
-- [Circle CI](www.circleci.com) - Cloud-based CI/CD service
-- [Amazon AWS](https://aws.amazon.com/) - Cloud services
-- [AWS CLI](https://aws.amazon.com/cli/) - Command-line tool for AWS
-- [CloudFormation](https://aws.amazon.com/cloudformation/) - Infrastrcuture as code
-- [Ansible](https://www.ansible.com/) - Configuration management tool
-- [Prometheus](https://prometheus.io/) - Monitoring tool
+<ul>
+  <li><a href="www.circleci.com">Circle CI</a><blockquote> <p> - Cloud-based CI/CD service </blockquote> </p></li>
+  <li><a href="https://aws.amazon.com/">Amazon AWS</a><blockquote> <p> - Cloud services</blockquote> </p></li>
+  <li><a href="https://aws.amazon.com/cli/">AWS CLI</a><blockquote> <p> - Command-line tool for AWS</blockquote> </p></li>
+  <li><a href="https://aws.amazon.com/cloudformation/">CloudFormation</a><blockquote> <p> - Infrastrcuture as code</blockquote> </p></li>
+  <li><a href="https://www.ansible.com/">Ansible</a><blockquote> <p> - Configuration management tool</blockquote> </p></li>
+  <li><a href="https://prometheus.io/">Prometheus</a><blockquote> <p> - Monitoring tool</blockquote> </p></li>
+</ul>
 
 <h2 href="#Description">Description</h2>
 <blockquote> <p> An implementation of a fully automated CI/CD pipeline for a React/NestJS website project. <br>
