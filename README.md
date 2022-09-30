@@ -1,57 +1,15 @@
-We are archiving this repository because we do not want learners to push personal development to the current repository. If you have any issues or suggestions to make, feel free to:
-- Utilize the https://knowledge.udacity.com/ forum to seek help on content-specific issues.
-- [Submit a support ticket](https://udacity.zendesk.com/hc/en-us/requests/new) along with the link to your forked repository. 
-- If you are an enterprise learner, please [Submit a support ticket here](https://udacityenterprise.zendesk.com/hc/en-us/requests/new?ticket_form_id=360000279131)
+# Give your Application Auto-Deploy Superpowers
 
-## Give your Application Auto-Deploy Superpowers
+![alt text](./Images/udapeople.png)
 
-In this project, you will prove your mastery of the following learning objectives:
+<h2>Table of Contents</h2>
+<ul>
+  <li><a href="#built-with--">Built With</a></li>
+  <li><a href="#Description">Description</a></li>
+  <li><a href="#Screenshots">Screenshots</a></li>
+</ul>
 
-- Explain the fundamentals and benefits of CI/CD to achieve, build, and deploy automation for cloud-based software products.
-- Utilize Deployment Strategies to design and build CI/CD pipelines that support Continuous Delivery processes.
-- Utilize a configuration management tool to accomplish deployment to cloud-based servers.
-- Surface critical server errors for diagnosis using centralized structured logging.
-
-![Diagram of CI/CD Pipeline we will be building.](udapeople.png)
-
-### Instructions
-
-* [Selling CI/CD](instructions/0-selling-cicd.md)
-* [Getting Started](instructions/1-getting-started.md)
-* [Deploying Working, Trustworthy Software](instructions/2-deploying-trustworthy-code.md)
-* [Configuration Management](instructions/3-configuration-management.md)
-* [Turn Errors into Sirens](instructions/4-turn-errors-into-sirens.md)
-
-### Project Submission
-
-For your submission, please submit the following:
-
-- A text file named `urls.txt` including:
-  1. Public Url to GitHub repository (not private) [URL01]
-  1. Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02]
-  1. Public URL for your CloudFront distribution (aka, your blue production front-end) [URL03]
-  1. Public URLs to deployed application back-end in EC2 [URL04]
-  1. Public URL to your Prometheus Server [URL05]
-- Your screenshots in JPG or PNG format, named using the screenshot number listed in the instructions. These screenshots should be included in your code repository in the root folder.
-  1. Job failed because of compile errors. [SCREENSHOT01]
-  1. Job failed because of unit tests. [SCREENSHOT02]
-  1. Job that failed because of vulnerable packages. [SCREENSHOT03]
-  1. An alert from one of your failed builds. [SCREENSHOT04]
-  1. Appropriate job failure for infrastructure creation. [SCREENSHOT05]
-  1. Appropriate job failure for the smoke test job. [SCREENSHOT06]
-  1. Successful rollback after a failed smoke test. [SCREENSHOT07]  
-  1. Successful promotion job. [SCREENSHOT08]
-  1. Successful cleanup job. [SCREENSHOT09]
-  1. Only deploy on pushed to `master` branch. [SCREENSHOT10]
-  1. Provide a screenshot of a graph of your EC2 instance including available memory, available disk space, and CPU usage. [SCREENSHOT11]
-  1. Provide a screenshot of an alert that was sent by Prometheus. [SCREENSHOT12]
-
-- Your presentation should be in PDF format named "presentation.pdf" and should be included in your code repository root folder. 
-
-Before you submit your project, please check your work against the project rubric. If you haven’t satisfied each criterion in the rubric, then revise your work so that you have met all the requirements. 
-
-### Built With
-
+<h2 href="#BuiltWith">Built With : </h2>
 - [Circle CI](www.circleci.com) - Cloud-based CI/CD service
 - [Amazon AWS](https://aws.amazon.com/) - Cloud services
 - [AWS CLI](https://aws.amazon.com/cli/) - Command-line tool for AWS
@@ -59,6 +17,119 @@ Before you submit your project, please check your work against the project rubri
 - [Ansible](https://www.ansible.com/) - Configuration management tool
 - [Prometheus](https://prometheus.io/) - Monitoring tool
 
-### License
+<h2 href="#Description">Description</h2>
+<blockquote> <p> An implementation of a fully automated CI/CD pipeline for a React/NestJS website project. <br>
+This a React/NestJS monorepo template for practicing a wide variety of DevOps tooling and practices like: CI/CD, infrastructure as code, blue/green deployment, configuration management, monitoring and logging. This is my implementation of a blue/green deployment on AWS cloud. This project is a submission for <a href="https://www.udacity.com/course/cloud-dev-ops-nanodegree--nd9991">Udacity's DevOps Nanodegree</a>.
+</p> </blockquote>
 
-[License](LICENSE.md)
+<h2 href="#Screenshots">Screenshots</h2>
+<ol>
+<li>
+  <h4>Backend build failed.</h4>
+  <img src="./Images/SCREENSHOT01 (Backend build failed).PNG">
+</li>
+<li>
+  <h4>Backend and frontend build successfully.</h4>
+  <img src="./Images/Backend and frontend builds success.PNG">
+</li>
+<li>
+  <h4>Unit tests failed.</h4>
+  <img src="./Images/Unit tests failed.PNG">
+</li>
+<li>
+  <h4>Backend test failed</h4>
+  <img src="./Images/SCREENSHOT02 (Backend test failed).PNG">
+</li>
+<li>
+  <h4>Unit tests run successfully.</h4>
+  <img src="./Images/Unit tests success.PNG">
+</li>
+<li>
+  <h4>Scan backend and frontend failed.</h4>
+  <img src="./Images/Scan backend and frontend failed.PNG">
+</li>
+<li>
+  <h4>Backend scan failed.</h4>
+  <img src="./Images/SCREENSHOT03 (Backend scan failed).PNG">
+</li>
+<li>
+  <h4>Backend and frontend scan successfully.</h4>
+  <img src="./Images/Backend and frontend scans success.PNG">
+</li>
+<li>
+  <h4>Email notification of failed build</h4>
+  <img src="./Images/SCREENSHOT04 (Email notification of failed build).PNG">
+</li>
+<li>
+  <h4>Ensure back-end infrastructure exists failed</h4>
+  <img src="./Images/SCREENSHOT05 (Ensure back-end infrastructure exists failed).PNG">
+</li>
+<li>
+  <h4>Run migrations successfully (I).</h4>
+  <img src="./Images/Run migrations success 1.PNG">
+</li>
+<li>
+  <h4>Run migrations successfully (II).</h4>
+  <img src="./Images/Run migrations success 2.PNG">
+</li>
+<li>
+  <h4>Run migrations successfully (III).</h4>
+  <img src="./Images/Run migrations success 3.PNG">
+</li>
+<li>
+  <h4>Run migrations successfully (IV).</h4>
+  <img src="./Images/Run migrations success 4.PNG">
+</li>
+<li>
+  <h4>Frontend smoke test failed.</h4>
+  <img src="./Images/SCREENSHOT06 (Frontend smoke test failed).PNG">
+</li>
+<li>
+  <h4>Rollback after failed smoke test successfully.</h4>
+  <img src="./Images/SCREENSHOT07 (Rollback after failed smoke test successfully).PNG">
+</li>
+<li>
+  <h4>CloudFront updates successfully.</h4>
+  <img src="./Images/SCREENSHOT08 (CloudFront update successfully).PNG">
+</li>
+<li>
+  <h4>Backend API works good.</h4>
+  <img src="./Images/URL04_SCREENSHOT (backend api works good).PNG">
+</li>
+<li>
+  <h4>Cleanup successfully.</h4>
+  <img src="./Images/SCREENSHOT09 (Cleanup).PNG">
+</li>
+<li>
+  <h4>Prometheus statistics about server node (I).</h4>
+  <img src="./Images/SCREENSHOT11 (Part 1).PNG">
+</li>
+<li>
+  <h4>Prometheus statistics about server node (II).</h4>
+  <img src="./Images/SCREENSHOT11 (Part 2).PNG">
+</li>
+<li>
+  <h4>Prometheus statistics about server node (III).</h4>
+  <img src="./Images/SCREENSHOT11 (Part 3).PNG">
+</li>
+<li>
+  <h4>Prometheus running good.</h4>
+  <img src="./Images/URL05_SCREENSHOT (Prometheus running good).PNG">
+</li>
+<li>
+  <h4>Slack alert.</h4>
+  <img src="./Images/SCREENSHOT12 (Slack alert).PNG">
+</li>
+<li>
+  <h4>Gmail alert</h4>
+  <img src="./Images/SCREENSHOT12 (Gmail alert).PNG">
+</li>
+<li>
+  <h4>Working website.</h4>
+  <img src="./Images/Working website.PNG">
+</li>
+<li>
+  <h4>Full pipeline runs successfully.</h4>
+  <img src="./Images/Full pipeline.PNG">
+</li>
+</ol>
